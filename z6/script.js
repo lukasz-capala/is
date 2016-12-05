@@ -40,7 +40,7 @@ $(document).ready(function() {
 				'g-recaptcha-response': recaptcha_validation.response,
 				format: $("#format").val()
 			};
-			console.log("test");
+
 			$.post("read.php?action=countMachinesByClass", JSON.stringify(parameters), function(data) {
 					$("#d_content").attr('src', data);
 				}, "json");
