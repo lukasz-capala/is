@@ -130,7 +130,7 @@ else {
 				$result = mysqli_query($mysqli, "CALL countMachinesByManufacturer($year, '$user_data')");
 				
 				$additional = array('year' => $year);
-				outputData($result, 'summary', 'manufacturer', $additional, $format, $theme);
+				outputData($result, 'summary', 'manuf', $additional, $format, $theme);
 			break;
 			
 			case 'get10MostExpensive':

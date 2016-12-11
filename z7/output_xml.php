@@ -12,7 +12,7 @@ $dom->save("summary.xml");
 $zip = new ZipArchive();
 $zip->open("summary.zip", ZipArchive::CREATE);
 $zip->addFile("summary.xml", "summary.xml");
-$zip->addFile("css/theme.css", "xmls.css");
+$zip->addFile("theme.css", "xmls.css");
 $zip->close();
 echo file_get_contents("summary.zip");
 
