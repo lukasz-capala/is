@@ -69,6 +69,7 @@ $user_data .= 'Time: '.$_SERVER['REQUEST_TIME']."\n";
 $user_data .= 'Query string: '.$_SERVER['QUERY_STRING']."\n";
 $user_data .= 'User-agent: '.$_SERVER['HTTP_USER_AGENT']."\n";
 $user_data .= 'IP: '.$_SERVER['REMOTE_ADDR']."\n";
+/*** Uncomment below line when publish ***/
 //$user_data .= 'Hostname: '.$_SERVER['REMOTE_HOST']."\n";
 $user_data .= 'Port: '.$_SERVER['REMOTE_PORT']."\n";
 $user_data .= 'File-name: '.$_SERVER['SCRIPT_FILENAME']."\n";
