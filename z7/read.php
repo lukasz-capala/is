@@ -36,7 +36,7 @@ function outputData($result, $root, $group = 'item', $additional = null, $format
 			$dom->loadXML($xml->asXML());
 			$dom->save("results.xml");
 
-			file_put_contents("theme.css", file_get_contents("css/".$theme.".css"));
+			file_put_contents("theme.css", file_get_contents("css/themes/".$theme.".css"));
 			echo json_encode("output_xml.php");
 		break;
 		

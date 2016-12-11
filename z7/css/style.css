@@ -93,6 +93,6 @@ p.entry:hover {
 	background: #8c0000;
 	border-radius: 3px;
 	border: 0;
-	padding: 2px;
+	padding: 2px 4px;
 	font-size: 60%;
 }
