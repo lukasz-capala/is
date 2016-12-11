@@ -114,7 +114,9 @@ else {
 	// Proceed to data download
 	$additional = null;
 	if ($captcha_verify["success"] != false) {
-		$theme = "default";
+		$theme = mysqli_real_escape_string($mysqli, $args->theme);
+		if(empty($theme))
+			$theme = "default";
 		
 		switch($action) {
 			case 'countMachinesByClass':

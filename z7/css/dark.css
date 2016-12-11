@@ -87,7 +87,7 @@ summary > purchased_before::before {
 }
 
 efficient_only {
-	color: rgba(0,0,0,0);
+	color: rgba(0,0,0,0) !important;
 	display: block;
 }
 
