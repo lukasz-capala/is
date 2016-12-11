@@ -1,6 +1,7 @@
+@import url('https://fonts.googleapis.com/css?family=Nunito+Sans:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&subset=latin-ext');
 summary {
-	background: #ffdfbf;
-	font-family: Consolas;
+	background: #fff;
+	font-family: 'Nunito Sans';
 	color: black;
 	width: 90%;
 	display: table;
@@ -16,8 +17,9 @@ summary::before {
 	content: "Podsumowanie";
 	display: block;
 	clear: both;
-	font-size: 28px;
-	margin: 10px 0 20px;
+	font-size: 24px;
+	margin: 10px 0 10px;
+	font-weight: 600;
 }
 
 summary > * {
@@ -25,7 +27,7 @@ summary > * {
 }
 
 summary > *:nth-child(2n) {
-	background: rgba(255,255,255, 0.2);
+	background: #e8e8e8;
 }
 
 summary > efficient_only::before,
@@ -39,8 +41,8 @@ summary > minimum_class::before,
 summary > purchased_before::before  {
 	display: inline-block;
 	font-weight: bold;
-	font-size: 16px;
-	margin-bottom: 10px;
+	font-size: 14px;
+	padding: 5px;
 	color: black;
 }
 
@@ -88,16 +90,18 @@ efficient_only {
 machine, class, manuf, cost_info, issue, person {
 	margin: 0 2px 5px;
 	padding: 4px;
+	font-size: 13px;
 	display: table-row;
-	border: 1px solid #777777;
+	border: 1px solid #000;
 }
 
 machine *, class *, manuf *, cost_info *, issue *, person * {
-	border-right: 1px  solid #777777;
+	border-right: 1px  solid #000;
 	border-collapse: collapse;
-	padding: 10px;
+	padding: 5px;
 	display: table-cell;
 	width: auto;
+	font-weight: 300;
 }
 
 machine *::before,
@@ -125,11 +129,11 @@ manuf:first-of-type *::before,
 cost_info:first-of-type *::before, 
 issue:first-of-type *::before,
 person:first-of-type *::before {
-	border-bottom: 1px solid #777777;
-	background: rgba(0,0,0,0.2);
-    margin: 0 -10px 10px;
-    padding: 10px 10px 0;
-	height: 50px;
+	border-bottom: 1px solid #000;
+	background: #bababa;
+    margin: 0 -5px 5px;
+    padding: 5px 5px 0;
+	height: 40px;
 }
 
 *:first-of-type *::before {
@@ -198,7 +202,7 @@ manuf *:hover,
 cost_info *:hover,
 issue *:hover,
 person *:hover {
-	background-color: #ffa74f;
+	background-color: #ffff80;
 	cursor: pointer;
 }
 
@@ -208,7 +212,7 @@ manuf *:active,
 cost_info *:active,
 issue *:active,
 person *:active {
-	background-color: #6cd900;
+	background-color: #ffcc99;
 }
 
 machine *:active:after,
@@ -218,5 +222,6 @@ cost_info *:active:after,
 issue *:active:after,
 person *:active:after {
 	content: "click!";
+	margin-left: 10px;
 	color: gray;
 }
