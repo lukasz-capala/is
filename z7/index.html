@@ -1,0 +1,214 @@
+<html>
+
+<head>
+	<title>Integracja Systemów - zadanie domowa</title>
+	<meta charset="utf-8" /> 
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="jquery.formatter.min.js"></script>
+	<script src='https://www.google.com/recaptcha/api.js'></script>
+    <script src="script.js"></script>
+	
+	<link href="https://fonts.googleapis.com/css?family=Josefin+Sans|Ubuntu+Condensed" rel="stylesheet"> 
+	<link href="css/style.css" rel="stylesheet"> 
+
+</head>
+
+<body>
+	<header>
+		<h1>Integracja Systemów - zadanie domowe 7</h1>
+	</header>
+	<p>Przed użyciem musisz potwierdzić że nie jesteś robotem:</p>
+	<div class="g-recaptcha" data-sitekey="6Le-3QsUAAAAADQQsOaVaiPNS_-o0K_6PmakggKD"></div>
+	<p>Możesz pobrać następujące dane:</p>
+	
+	<section>
+		<p>Dane zwracaj w formacie:</p>
+		<select id="format" name="f">
+			<option value="xml" selected="selected">XML</option>
+			<option value="json">JSON</option>
+			<option value="yaml">YAML</option>
+		</select>
+		<span>Motyw kolorystyczny<sup><b>NOWOŚĆ!</b></sup>:</span>
+		<select id="theme" name="t">
+			<option value="default" selected="selected">Domyślny</option>
+			<option value="dark">Dark</option>
+			<option value="plain_white">Plain white</option>
+			<option value="candy">Candy</option>
+			<option value="formal">Formal</option>
+			<option value="custom">Własny</option>
+		</select>
+	
+		<div class="form" id="form1">
+			<p class="entry">1. Podliczenie komputerów według klas.</p>
+			<select name="mnf">
+				<option value="">Wszyscy producenci</option>
+				<option value="Borland">Borland</option>
+				<option value="Microsoft">Microsoft</option>
+				<option value="Lavasoft">Lavasoft</option>
+				<option value="Sibelius">Sibelius</option>
+				<option value="Lycos">Lycos</option>
+				<option value="Altavista">Altavista</option>
+				<option value="Cakewalk">Cakewalk</option>
+				<option value="Adobe">Adobe</option>
+				<option value="Finale">Finale</option>
+				<option value="Google">Google</option>
+				<option value="Chami">Chami</option>
+				<option value="Apple Systems">Apple Systems</option>
+				<option value="Yahoo">Yahoo</option>
+				<option value="Macromedia">Macromedia</option>
+			</select>
+			<button type="button">Pobierz</button>
+		</div>
+		
+		<div class="form" id="form2">
+			<p class="entry">2. Podliczenie komputerów według producenta.</p>
+			<span>Wszystkie zakupione przed rokiem:</span>
+			<input type="number" name="year" min="1990" max="2017" value="2016" >
+			<button type="button">Pobierz</button>
+		</div>
+		
+		<div class="form" id="form3">
+			<p class="entry">3. TOP 10 najdroższych napraw.</p>
+			<label>
+				<input type="checkbox" name="eff_only" />
+				Tylko sprawne
+			</label>
+			<button type="button">Pobierz</button>
+		</div>
+		
+		<div class="form" id="form4">
+			<p class="entry">4. Średni koszt napraw.</p>
+			<select name="mnf">
+				<option value="">Wszyscy producenci</option>
+				<option value="Borland">Borland</option>
+				<option value="Microsoft">Microsoft</option>
+				<option value="Lavasoft">Lavasoft</option>
+				<option value="Sibelius">Sibelius</option>
+				<option value="Lycos">Lycos</option>
+				<option value="Altavista">Altavista</option>
+				<option value="Cakewalk">Cakewalk</option>
+				<option value="Adobe">Adobe</option>
+				<option value="Finale">Finale</option>
+				<option value="Google">Google</option>
+				<option value="Chami">Chami</option>
+				<option value="Apple Systems">Apple Systems</option>
+				<option value="Yahoo">Yahoo</option>
+				<option value="Macromedia">Macromedia</option>
+			</select>
+			<button type="button">Pobierz</button>
+		</div>
+		
+		<div class="form" id="form5">
+			<p class="entry">5. Ostatnie naprawy.</p>
+			<span>Od:</span>
+			<input type="text" name="date_from" placeholder="rrrr-mm-dd" />
+			<span>Do:</span>
+			<input type="text" name="date_to"  placeholder="rrrr-mm-dd" />
+			<button type="button">Pobierz</button>
+		</div>
+		
+		<div class="form" id="form6">
+			<p class="entry">6. Ostatnie n niesprawnych komputerów.</p>
+			<span>Dział:</span>
+			<select name="dp_name">
+				<option value="Research and Development">Research and Development</option>
+				<option value="Sales and Marketing">Sales and Marketing</option>
+				<option value="Legal Department">Legal Department</option>
+				<option value="Accounting">Accounting</option>
+				<option value="Public Relations">Public Relations</option>
+				<option value="Payroll">Payroll</option>
+				<option value="Asset Management">Asset Management</option>
+				<option value="Customer Relations">Customer Relations</option>
+				<option value="Quality Assurance">Quality Assurance</option>
+				<option value="Tech Support">Tech Support</option>
+				<option value="Human Resources">Human Resources</option>
+				<option value="Finances">Finances</option>
+				<option value="Customer Service">Customer Service</option>
+				<option value="Advertising">Advertising</option>
+				<option value="Media Relations">Media Relations</option>
+			</select>
+			<span>Ilość:</span>
+			<input type="range" name="cnt" min="0" max="100" value="50" step="10"><span class="cnt">50</span>
+			<button type="button">Pobierz</button>
+		</div>
+		
+		<div class="form" id="form7">
+			<p class="entry">7. Komputery Microsoftu.</p>
+			<label>
+				<input type="checkbox" name="eff_only" />
+				Tylko sprawne
+			</label>
+			<span>Minimalny koszt naprawy:</span>
+			<input type="number" name="min_fee" min="0" max="25000" value="0" >
+			<button type="button">Pobierz</button>
+		</div>
+		
+		<div class="form" id="form8">
+			<p class="entry">8. Właściciele komputerów.</p>
+			<label>
+				<input type="checkbox" name="eff_only" />
+				Tylko sprawne
+			</label>
+			<span>Minimalna klasa sprzętu:</span>
+			<input type="number" name="min_class" min="0" max="255" value="0" >
+			<span>Dział:</span>
+			<select name="dp_name">
+				<option value="Research and Development">Research and Development</option>
+				<option value="Sales and Marketing">Sales and Marketing</option>
+				<option value="Legal Department">Legal Department</option>
+				<option value="Accounting">Accounting</option>
+				<option value="Public Relations">Public Relations</option>
+				<option value="Payroll">Payroll</option>
+				<option value="Asset Management">Asset Management</option>
+				<option value="Customer Relations">Customer Relations</option>
+				<option value="Quality Assurance">Quality Assurance</option>
+				<option value="Tech Support">Tech Support</option>
+				<option value="Human Resources">Human Resources</option>
+				<option value="Finances">Finances</option>
+				<option value="Customer Service">Customer Service</option>
+				<option value="Advertising">Advertising</option>
+				<option value="Media Relations">Media Relations</option>
+			</select>
+			<button type="button">Pobierz</button>
+		</div>
+		
+		<div class="form" id="form9">
+			<p class="entry">9. TOP50 osób według ilości posiadanych komputerów.</p>
+			<span>Zakupione przed:</span>
+			<input type="text" name="dt_owned" placeholder="rrrr-mm-dd" />
+			<button type="button">Pobierz</button>
+		</div>
+		
+		<div class="form" id="form10">
+			<p class="entry">10. Całkowity koszt napraw.</p>
+			<select name="mnf">
+				<option value="">Wszyscy producenci</option>
+				<option value="Borland">Borland</option>
+				<option value="Microsoft">Microsoft</option>
+				<option value="Lavasoft">Lavasoft</option>
+				<option value="Sibelius">Sibelius</option>
+				<option value="Lycos">Lycos</option>
+				<option value="Altavista">Altavista</option>
+				<option value="Cakewalk">Cakewalk</option>
+				<option value="Adobe">Adobe</option>
+				<option value="Finale">Finale</option>
+				<option value="Google">Google</option>
+				<option value="Chami">Chami</option>
+				<option value="Apple Systems">Apple Systems</option>
+				<option value="Yahoo">Yahoo</option>
+				<option value="Macromedia">Macromedia</option>
+			</select>
+			<button type="button">Pobierz</button>
+		</div>
+	</section>
+	
+	<footer>
+		<div>©2016</div>
+	</footer>
+	
+	<iframe id="d_content" src="results.xml"></iframe>
+</body>
+
+</html>

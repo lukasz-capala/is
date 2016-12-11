@@ -1,0 +1,93 @@
+summary {
+	background: #ffdfbf;
+	font-family: Consolas;
+	width: 90%;
+	display: table;
+	border-collapse: collapse;
+	margin-top: 10px;
+	table-layout: auto;
+	position: absolute;
+	margin-left: -45%;
+	left: 50%;
+}
+
+summary::before {
+	content: "List of computers:";
+	display: table-row;
+	clear: both;
+	font-size: 28px;
+	margin: 0 0 20px;
+}
+
+summary machine, summary efficient_only {
+	display: table-row;
+}
+
+efficient_only::before {
+	content: "This list contains efficient machines only: ";
+	display: inline-block;
+	font-weight: bold;
+	font-size: 16px;
+	margin-bottom: 10px;
+	color: black;
+}
+
+efficient_only {
+	color: #ffdfbf;
+	display: block;
+}
+
+machine {
+	margin: 0 2px 5px;
+	padding: 4px;
+	display: table-row;
+	border: 1px solid #777777;
+}
+
+machine *  {
+	border-right: 1px  solid #777777;
+	border-collapse: collapse;
+	padding: 10px;
+	display: table-cell;
+	width: auto;
+}
+
+machine *::before {
+	margin-right: 4px;
+	font-weight: bold;
+}
+
+machine:first-of-type dep_name::before {
+	content: "department name: ";
+	display: block;
+}
+
+machine serial_number::before {
+	content: "s/n: ";
+}
+
+machine issue_desc::before {
+	content: "desc";
+}
+
+machine repair_fee::before {
+	content: "repair fee: ";
+}
+
+machine :last-child {
+
+}
+
+machine *:hover {
+	background-color: #ffa74f;
+	cursor: pointer;
+}
+
+machine *:active {
+	background-color: #6cd900;
+}
+
+machine *:active:after {
+	content: "click!";
+	color: gray;
+}
