@@ -94,5 +94,6 @@ p.entry:hover {
 	border-radius: 3px;
 	border: 0;
 	padding: 2px 4px;
+	margin: 0 2px;
 	font-size: 60%;
 }
