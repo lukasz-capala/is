@@ -1,0 +1,227 @@
+@import url('https://fonts.googleapis.com/css?family=Nunito+Sans:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&subset=latin-ext');
+summary {
+	background: /**background_color**/;
+	font-family: 'Nunito Sans';
+	color: /**text_color**/;
+	width: 90%;
+	display: table;
+	border-collapse: collapse;
+	margin-top: 10px;
+	table-layout: auto;
+	position: absolute;
+	margin-left: -45%;
+	left: 50%;
+}
+
+summary::before {
+	content: "Podsumowanie";
+	display: block;
+	clear: both;
+	font-size: /**header_font_size**/;
+	margin: 10px 0 10px;
+	font-weight: 600;
+}
+
+summary > * {
+	display: table-row;
+}
+
+summary > *:nth-child(2n) {
+	background: /**even_row_color**/;
+}
+
+summary > efficient_only::before,
+summary > manufacturer::before,
+summary > year::before,
+summary > date_from::before,
+summary > date_to::before,
+summary > department_name::before,
+summary > minimum_fee::before,
+summary > minimum_class::before,
+summary > purchased_before::before  {
+	display: inline-block;
+	font-weight: bold;
+	font-size: /**info_font_size**/;
+	padding: /**cell_padding**/;
+	color: /**text_color**/;
+}
+
+summary > efficient_only::before {
+	content: "Ta lista zawiera tylko sprawne komputery.";
+}
+
+summary > manufacturer::before {
+	content: "Producent: ";
+} 
+
+summary > year::before {
+	content: "Rok: ";
+}
+
+summary > date_from::before {
+	content: "Data od: ";
+}
+
+summary > date_to::before {
+	content: "Data do: ";
+}
+
+summary > department_name::before {
+	content: "Dział: ";
+}
+
+summary > minimum_fee::before {
+	content: "Minimalny koszt naprawy: ";
+}
+
+summary > minimum_class::before {
+	content: "Minimalna klasa: ";
+}
+
+summary > purchased_before::before {
+	content: "Zakupione przed: ";
+}
+
+efficient_only {
+	color: rgba(0,0,0,0) !important;
+	display: block;
+}
+
+machine, class, manuf, cost_info, issue, person {
+	margin: 0 2px 5px;
+	padding: 4px;
+	font-size: /**font_size**/;
+	display: table-row;
+	border: /**border_width**/ solid /**border_color**/;
+}
+
+machine *, class *, manuf *, cost_info *, issue *, person * {
+	border-right: /**border_width**/  solid /**border_color**/;
+	border-collapse: collapse;
+	padding: 5px;
+	display: table-cell;
+	width: auto;
+	font-weight: 300;
+}
+
+machine *::before,
+class *::before,
+manuf *::before,
+cost_info *::before,
+issue *::before,
+person *::before {
+	margin-right: 4px;
+	font-weight: bold;
+}
+
+machine:first-of-type > *,
+class:first-of-type > *,
+manuf:first-of-type > *,
+cost_info:first-of-type > *,
+issue:first-of-type > *,
+person:first-of-type > * {
+	padding-top: 0;
+}
+
+machine:first-of-type *::before,
+class:first-of-type *::before,
+manuf:first-of-type *::before,
+cost_info:first-of-type *::before, 
+issue:first-of-type *::before,
+person:first-of-type *::before {
+	border-bottom: /**border_width**/ solid /**border_color**/;
+	background: /**table_header_color**/;
+    margin: 0 -5px /**cell_padding**/;
+    padding: /**cell_padding**/ /**cell_padding**/ 0;
+	height: 40px;
+}
+
+*:first-of-type *::before {
+	display: block;
+}
+
+*:first-of-type dep_name::before {
+	content: "Nazwa działu";
+}
+
+*:first-of-type serial_number::before {
+	content: "Numer seryjny";
+}
+
+*:first-of-type issue_desc::before {
+	content: "Opis usterki";
+}
+
+*:first-of-type  repair_fee::before {
+	content: "Koszt naprawy";
+}
+
+*:first-of-type class_sm::before {
+	content: "Symbol klasy";
+}
+
+*:first-of-type machines::before {
+	content: "Liczba komputerów";
+}
+
+*:first-of-type mnf_name::before {
+	content: "Producent";
+}
+
+*:first-of-type average_fee::before {
+	content: "Średni koszt naprawy";
+}
+
+*:first-of-type total_fee::before {
+	content: "Całkowity koszt napraw";
+}
+
+*:first-of-type issue_date::before {
+	content: "Data usterki";
+}
+
+*:first-of-type owner_name::before {
+	content: "Imię właściciela";
+}
+
+*:first-of-type owner_surname::before {
+	content: "Nazwisko właściciela";
+}
+
+*:first-of-type class_::before {
+	content: "Klasa";
+}
+
+*:first-of-type machine_desc::before {
+	content: "Opis komputera";
+}
+
+machine *:hover,
+class *:hover,
+manuf *:hover,
+cost_info *:hover,
+issue *:hover,
+person *:hover {
+	background-color: /**hover_color**/;
+	cursor: pointer;
+}
+
+machine *:active,
+class *:active,
+manuf *:active,
+cost_info *:active,
+issue *:active,
+person *:active {
+	background-color: /**active_color**/;
+}
+
+machine *:active:after,
+class *:active:after,
+manuf *:active:after,
+cost_info *:active:after,
+issue *:active:after,
+person *:active:after {
+	content: "click!";
+	margin-left: 10px;
+	color: gray;
+}

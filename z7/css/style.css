@@ -97,3 +97,67 @@ p.entry:hover {
 	margin: 0 2px;
 	font-size: 60%;
 }
+
+#edit-custom-theme {
+	display: none;
+}
+
+#custom-theme-settings {
+	max-width: 450px;
+	display: none;
+	background: white;
+	margin: 4px 0;
+	border-radius: 10px;
+	padding: 15px;
+	box-shadow: inset 0 0 10px rgba(0,0,0,0.2);
+}
+
+#custom-theme-settings h3 {
+	display: block;
+	width: 94%;
+	padding: 5px;
+	margin-bottom: 4px;
+	border-bottom: 1px solid #bbbbbb;
+}
+
+#custom-theme-settings input {
+	vertical-align: middle;
+}
+
+#custom-theme-settings > span {
+	display: block;
+	clear: both;
+}
+
+#custom-theme-settings span {
+	padding: 4px 0;
+	font-size: 14px;
+}
+
+#custom-theme-settings input[type=text] {
+	font-size: 14px;
+	height: 20px;
+	padding: 2px;
+	margin: 0 10px;
+	cursor: pointer;
+}
+
+#custom-theme-settings > span div.color {
+	display: inline-block;
+	vertical-align: middle;
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	border: 2px solid black;
+	box-shadow: 0 0 5px rgba(0,0,0,0.2);
+	margin: 0 2px;
+}
+
+#custom-theme-settings button {
+	display: block;
+	clear: both;
+	width: 140px;
+	padding: 5px;
+	font-size: 14px;
+	background-color: #888888;
+}

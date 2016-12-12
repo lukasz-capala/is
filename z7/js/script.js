@@ -1,4 +1,90 @@
 $(document).ready(function() {
+	/** default theme options **/
+	var theme_settings = {
+		font_size: "13px",
+		header_font_size: "24px",
+		info_font_size: "14px",
+		background_color: "#ffffff",
+		text_color: "#000000",
+		border_color: "#000000",
+		border_width: "1px",
+		cell_padding: "5px",
+		even_row_color: "#e8e8e8",
+		table_header_color: "#bababa",
+		hover_color: "#ffff80",
+		active_color: "#ffcc99"
+	};
+	
+	var theme_settings_default = {
+		font_size: "13px",
+		header_font_size: "24px",
+		info_font_size: "14px",
+		background_color: "#ffffff",
+		text_color: "#000000",
+		border_color: "#000000",
+		border_width: "1px",
+		cell_padding: "5px",
+		even_row_color: "#e8e8e8",
+		table_header_color: "#bababa",
+		hover_color: "#ffff80",
+		active_color: "#ffcc99"
+	};
+	
+	$("#format").val("xml");
+	$("#theme").val("default");
+	
+	$("#custom-theme-settings input[type=range]").on("input change", function() {
+		$(this).next("span.cnt").text($(this).val()+"px");
+		theme_settings[$(this).attr("name")] = $(this).val()+"px";
+	});
+	
+	// Initialize
+	function initialize() {
+		$("#custom-theme-settings input[type=text]").each(function() {
+			$(this).val(theme_settings_default[$(this).attr("name")]);
+			$(this).next("div.color").css("background-color", theme_settings_default[$(this).attr("name")]);
+		});
+		
+		$("#custom-theme-settings input[type=range]").each(function() {
+			$(this).val(parseInt(theme_settings_default[$(this).attr("name")]));
+			$(this).next("span.cnt").text(theme_settings_default[$(this).attr("name")]);
+		});			
+	};
+	initialize();
+	
+	// Show color picker
+	$("#custom-theme-settings input[type=text]").on("click focusin", function() {
+		var element = $(this);
+		$(this).ColorPicker({
+			color: theme_settings[$(element).attr("name")],
+			onChange: function(hsb, hex, rgb) {
+				element.val("#"+hex);
+				theme_settings[$(element).attr("name")] = "#"+hex;
+				
+				$(element).next("div.color").css("background-color", theme_settings[$(element).attr("name")]);
+			},
+			onBeforeShow: function () {
+				$(this).ColorPickerSetColor(element.val());
+			}
+		});
+	});
+	
+	// Set color while typing
+	$("#custom-theme-settings input[type=text]").on("input change", function() {
+		theme_settings[$(this).attr("name")] = $(this).val();
+		$(this).ColorPickerSetColor($(this).val());
+		
+		$(this).next("div.color").css("background-color", theme_settings[$(this).attr("name")]);
+	});
+	
+	// Reset to default
+	$("#custom-theme-settings button").click(function() {
+		for(var key in theme_settings) {
+			theme_settings[key] = theme_settings_default[key];
+		}
+		initialize();
+	});
+	
 	/** formatter for date inputs **/
 	$("input[name=date_from], input[name=date_to], input[name=dt_owned]").formatter({
 	  'pattern': '{{9999}}-{{99}}-{{99}}',
@@ -28,11 +114,36 @@ $(document).ready(function() {
 			$("span ~ #theme").fadeIn(200);
 			$("#format").next("span").fadeIn(200);
 			$("#theme").attr("disabled", false);
+			$("#edit-custom-theme").text("Edytuj");
+			$("#theme").val("default");
 		}
 		else {
 			$("span ~ #theme").fadeOut(200);
 			$("#format").next("span").fadeOut(200);
 			$("#theme").attr("disabled", true);
+			$("#custom-theme-settings").hide(200);
+			$("#edit-custom-theme").fadeOut(200);
+			$("#edit-custom-theme").text("Edytuj");
+		}
+	});
+	
+	$("#theme").on("input change", function() {
+		if($(this).val() == "custom") {
+			$("#edit-custom-theme").fadeIn(200);
+			$("#edit-custom-theme").text("Edytuj");
+		} else {
+			$("#custom-theme-settings").hide(200);
+			$("#edit-custom-theme").fadeOut(200);
+		}
+	});
+	
+	$("#edit-custom-theme").click(function() {
+		if($("#custom-theme-settings").is(":visible")) {
+			$("#custom-theme-settings").hide(200);
+			$(this).text("Edytuj");
+		} else {
+			$("#custom-theme-settings").show(200);
+			$(this).text("Gotowe");
 		}
 	});
 	
@@ -52,7 +163,8 @@ $(document).ready(function() {
 				mnf: $("#form1 select[name=mnf]").val(),
 				'g-recaptcha-response': recaptcha_validation.response,
 				format: $("#format").val(),
-				theme: $("#theme").val()
+				theme: $("#theme").val(),
+				custom_theme_settings: ($("#theme").val() == "custom" ? theme_settings : null)
 			};
 
 			$.post("read.php?action=countMachinesByClass", JSON.stringify(parameters), function(data) {
@@ -74,7 +186,8 @@ $(document).ready(function() {
 				year: $("#form2 input[name=year]").val(),
 				'g-recaptcha-response': recaptcha_validation.response,
 				format: $("#format").val(),
-				theme: $("#theme").val()
+				theme: $("#theme").val(),
+				custom_theme_settings: ($("#theme").val() == "custom" ? theme_settings : null)
 			};
 			
 			$.post("read.php?action=countMachinesByManufacturer", JSON.stringify(parameters), function(data) {
@@ -96,7 +209,8 @@ $(document).ready(function() {
 				eff_only: $("#form3 input[name=eff_only]").is(":checked"),
 				'g-recaptcha-response': recaptcha_validation.response,
 				format: $("#format").val(),
-				theme: $("#theme").val()
+				theme: $("#theme").val(),
+				custom_theme_settings: ($("#theme").val() == "custom" ? theme_settings : null)
 			};
 			
 			$.post("read.php?action=get10MostExpensive", JSON.stringify(parameters), function(data) {
@@ -118,7 +232,8 @@ $(document).ready(function() {
 				mnf: $("#form4 select[name=mnf]").val(),
 				'g-recaptcha-response': recaptcha_validation.response,
 				format: $("#format").val(),
-				theme: $("#theme").val()
+				theme: $("#theme").val(),
+				custom_theme_settings: ($("#theme").val() == "custom" ? theme_settings : null)
 			};
 			
 			$.post("read.php?action=getAverageCost", JSON.stringify(parameters), function(data) {
@@ -141,7 +256,8 @@ $(document).ready(function() {
 				date_to: $("#form5 input[name=date_to]").val(),
 				'g-recaptcha-response': recaptcha_validation.response,
 				format: $("#format").val(),
-				theme: $("#theme").val()
+				theme: $("#theme").val(),
+				custom_theme_settings: ($("#theme").val() == "custom" ? theme_settings : null)
 			};
 			
 			$.post("read.php?action=getLastIssues", JSON.stringify(parameters), function(data) {
@@ -164,7 +280,8 @@ $(document).ready(function() {
 				dp_name: $("#form6 select[name=dp_name]").val(),
 				'g-recaptcha-response': recaptcha_validation.response,
 				format: $("#format").val(),
-				theme: $("#theme").val()
+				theme: $("#theme").val(),
+				custom_theme_settings: ($("#theme").val() == "custom" ? theme_settings : null)
 			};
 			
 			$.post("read.php?action=getLastNonEfficient", JSON.stringify(parameters), function(data) {
@@ -187,7 +304,8 @@ $(document).ready(function() {
 				min_fee: $("#form7 input[name=min_fee]").val(),
 				'g-recaptcha-response': recaptcha_validation.response,
 				format: $("#format").val(),
-				theme: $("#theme").val()
+				theme: $("#theme").val(),
+				custom_theme_settings: ($("#theme").val() == "custom" ? theme_settings : null)
 			};
 			
 			$.post("read.php?action=getMicrosoftMachines", JSON.stringify(parameters), function(data) {
@@ -211,7 +329,8 @@ $(document).ready(function() {
 				dp_name: $("#form8 select[name=dp_name]").val(),
 				'g-recaptcha-response': recaptcha_validation.response,
 				format: $("#format").val(),
-				theme: $("#theme").val()
+				theme: $("#theme").val(),
+				custom_theme_settings: ($("#theme").val() == "custom" ? theme_settings : null)
 			};
 			
 			$.post("read.php?action=getOwnersAndDescriptions", JSON.stringify(parameters), function(data) {
@@ -233,7 +352,8 @@ $(document).ready(function() {
 				dt_owned: $("#form9 input[name=dt_owned]").val(),
 				'g-recaptcha-response': recaptcha_validation.response,
 				format: $("#format").val(),
-				theme: $("#theme").val()
+				theme: $("#theme").val(),
+				custom_theme_settings: ($("#theme").val() == "custom" ? theme_settings : null)
 			};
 			
 			$.post("read.php?action=getOwnersTop50", JSON.stringify(parameters), function(data) {
@@ -255,7 +375,8 @@ $(document).ready(function() {
 				mnf: $("#form10 select[name=mnf]").val(),
 				'g-recaptcha-response': recaptcha_validation.response,
 				format: $("#format").val(),
-				theme: $("#theme").val()
+				theme: $("#theme").val(),
+				custom_theme_settings: ($("#theme").val() == "custom" ? theme_settings : null)
 			};
 			
 			$.post("read.php?action=getTotalCosts", JSON.stringify(parameters), function(data) {

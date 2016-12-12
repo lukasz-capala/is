@@ -13,7 +13,7 @@ function arrayToXML($output, &$xml, $group = 'item') {
      }
 }
 
-function outputData($result, $root, $group = 'item', $additional = null, $format = 'xml', $theme = 'default') {
+function outputData($result, $root, $group = 'item', $additional = null, $format = 'xml', $theme = 'default', $theme_settings = null) {
 	$output = Array();
 	$i = 0;
 		while($row = mysqli_fetch_assoc($result)) {
@@ -35,8 +35,23 @@ function outputData($result, $root, $group = 'item', $additional = null, $format
 			$dom->formatOutput = true;
 			$dom->loadXML($xml->asXML());
 			$dom->save("results.xml");
-
-			file_put_contents("theme.css", file_get_contents("css/themes/".$theme.".css"));
+	
+			if($theme == "custom" && !is_null($theme_settings)) {
+				$theme_template = file_get_contents("css/themes/custom.css");
+				foreach($theme_settings as $key => $value) {
+					$theme_template = str_replace(
+						"/**".$key."**/",
+						substr($value, 0, 7),
+						$theme_template
+					);
+				}
+				
+				file_put_contents("theme.css", $theme_template);
+				
+			} else {
+				file_put_contents("theme.css", file_get_contents("css/themes/".$theme.".css"));
+			}
+			
 			echo json_encode("output_xml.php");
 		break;
 		
@@ -118,6 +133,8 @@ else {
 		if(empty($theme))
 			$theme = "default";
 		
+		$theme_settings = $args->custom_theme_settings;
+		
 		switch($action) {
 			case 'countMachinesByClass':
 				$manufacturer = mysqli_real_escape_string($mysqli, $args->mnf);
@@ -125,7 +142,7 @@ else {
 				
 				if(!empty($manufacturer))
 					$additional = array('manufacturer' => $manufacturer);
-				outputData($result, 'summary', 'class', $additional, $format, $theme);
+				outputData($result, 'summary', 'class', $additional, $format, $theme, $theme_settings);
 			break;
 			
 			case 'countMachinesByManufacturer':
@@ -133,7 +150,7 @@ else {
 				$result = mysqli_query($mysqli, "CALL countMachinesByManufacturer($year, '$user_data')");
 				
 				$additional = array('year' => $year);
-				outputData($result, 'summary', 'manuf', $additional, $format, $theme);
+				outputData($result, 'summary', 'manuf', $additional, $format, $theme, $theme_settings);
 			break;
 			
 			case 'get10MostExpensive':
@@ -143,14 +160,14 @@ else {
 				if($eff_only === 1)
 					$additional = array('efficient_only' => '1');
 				
-				outputData($result, 'summary', 'machine', $additional, $format, $theme);
+				outputData($result, 'summary', 'machine', $additional, $format, $theme, $theme_settings);
 			break;
 			
 			case 'getAverageCost':
 				$manufacturer = mysqli_real_escape_string($mysqli, $args->mnf);
 				$result = mysqli_query($mysqli, "CALL getAverageCost('$manufacturer', '$user_data')");
 				
-				outputData($result, 'summary', 'cost_info', null, $format, $theme);
+				outputData($result, 'summary', 'cost_info', null, $format, $theme, $theme_settings);
 			break;
 			
 			case 'getLastIssues':
@@ -169,7 +186,7 @@ else {
 				$result = mysqli_query($mysqli, "CALL getLastIssues('$date_from', '$date_to', '$user_data')");
 				
 				$additional = array('date_from' => $date_from, 'date_to' => $date_to);
-				outputData($result, 'summary', 'issue', $additional, $format, $theme);
+				outputData($result, 'summary', 'issue', $additional, $format, $theme, $theme_settings);
 			break;
 			
 			case 'getLastNonEfficient':
@@ -178,7 +195,7 @@ else {
 				$result = mysqli_query($mysqli, "CALL getLastNonEfficient($cnt, '$dp_name', '$user_data')");
 				
 				$additional = array('department_name' => $dp_name);
-				outputData($result, 'summary', 'machine', $additional, $format, $theme);
+				outputData($result, 'summary', 'machine', $additional, $format, $theme, $theme_settings);
 			break;
 			
 			case 'getMicrosoftMachines':
@@ -196,7 +213,7 @@ else {
 					$additional['minimum_fee'] = $min_fee;
 				}
 				
-				outputData($result, 'summary', 'machine', $additional, $format, $theme);
+				outputData($result, 'summary', 'machine', $additional, $format, $theme, $theme_settings);
 			break;
 			
 			case 'getOwnersAndDescriptions':
@@ -214,7 +231,7 @@ else {
 					$additional['minimum_class'] = $min_class;
 				}
 				
-				outputData($result, 'summary', 'person', $additional, $format, $theme);
+				outputData($result, 'summary', 'person', $additional, $format, $theme, $theme_settings);
 			break;
 			
 			case 'getOwnersTop50':
@@ -227,7 +244,7 @@ else {
 				$result = mysqli_query($mysqli, "CALL getOwnersTop50('$dt_owned', '$user_data')");
 				
 				$additional = array('purchased_before' => $dt_owned);
-				outputData($result, 'summary', 'person', $additional, $format, $theme);
+				outputData($result, 'summary', 'person', $additional, $format, $theme, $theme_settings);
 				
 			break;
 			
@@ -235,7 +252,7 @@ else {
 				$manufacturer = mysqli_real_escape_string($mysqli, $args->mnf);
 				$result = mysqli_query($mysqli, "CALL getTotalCosts('$manufacturer', '$user_data')");
 				
-				outputData($result, 'summary', 'cost_info', null, $format, $theme);
+				outputData($result, 'summary', 'cost_info', null, $format, $theme, $theme_settings);
 			break;
 			
 			default:

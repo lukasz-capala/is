@@ -7,11 +7,13 @@
 	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script src="js/jquery.formatter.min.js"></script>
+	<script type="text/javascript" src="js/colorpicker.js"></script>
 	<script src='https://www.google.com/recaptcha/api.js'></script>
     <script src="js/script.js"></script>
 	
 	<link href="https://fonts.googleapis.com/css?family=Josefin+Sans|Ubuntu+Condensed" rel="stylesheet"> 
 	<link href="css/style.css" rel="stylesheet"> 
+	<link href="css/colorpicker.css"rel="stylesheet" media="screen" type="text/css">
 
 </head>
 
@@ -39,6 +41,61 @@
 			<option value="modern">Modern</option>
 			<option value="custom">Własny</option>
 		</select>
+		<button id="edit-custom-theme">Edytuj</button>
+		<div id="custom-theme-settings">
+			<h3>Stwórz własny motyw</h3>
+			<span>Rozmiar tekstu:
+			<input type="range" name="font_size" min="12" max="18" value="13" step="1"><span class="cnt">13px</span></span>	
+			
+			<span>Rozmiar tekstu nagłówka:
+			<input type="range" name="header_font_size" min="12" max="24" value="24" step="1"><span class="cnt">24px</span></span>
+			
+			<span>Rozmiar informacji nagłówka:
+			<input type="range" name="info_font_size" min="12" max="18" value="14" step="1"><span class="cnt">14px</span></span>
+			
+			<span>Kolor tła:
+			<input type="text" size="7" maxlength="7" name="background_color"/>
+			<div class="color"></div>
+			</span>
+			
+			<span>Kolor tekstu:
+			<input type="text" size="7" maxlength="7" name="text_color"/>
+			<div class="color"></div>
+			</span>
+			
+			<span>Kolor obramowania:
+			<input type="text" size="7" maxlength="7" name="border_color"/>
+			<div class="color"></div>
+			</span>
+			
+			<span>Grubość obramowania:
+			<input type="range" name="border_width" min="1" max="6" value="1" step="1"><span class="cnt">1px</span></span>
+			
+			<span>Margines wewnętrzny:
+			<input type="range" name="cell_padding" min="1" max="15" value="5" step="1"><span class="cnt">5px</span></span>
+			
+			<span>Kolor tła parzystego wiersza:
+			<input type="text" size="7" maxlength="7" name="even_row_color"/>
+			<div class="color"></div>
+			</span>
+			
+			<span>Kolor tła nagłówka tabeli:
+			<input type="text" size="7" maxlength="7" name="table_header_color"/>
+			<div class="color"></div>
+			</span>
+			
+			<span>Kolor podświetlenia komórki:
+			<input type="text" size="7" maxlength="7" name="hover_color"/>
+			<div class="color"></div>
+			</span>
+			
+			<span>Kolor klikniętej komórki:
+			<input type="text" size="7" maxlength="7" name="active_color"/>
+			<div class="color"></div>
+			</span>
+			
+			<button>Przywróć domyślne</button>
+		</div>
 	
 		<div class="form" id="form1">
 			<p class="entry">1. Podliczenie komputerów według klas.</p>
