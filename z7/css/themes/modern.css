@@ -1,0 +1,229 @@
+@import url('https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900&subset=latin-ext');
+summary {
+	background: #dddddd;
+	font-family: 'Catamaran';
+	color: black;
+	width: 90%;
+	display: table;
+	border-collapse: collapse;
+	margin-top: 10px;
+	table-layout: auto;
+	position: absolute;
+	margin-left: -45%;
+	left: 50%;
+}
+
+summary::before {
+	content: "Podsumowanie";
+	display: block;
+	clear: both;
+	font-size: 44px;
+	border-left: 10px solid #b5804a;
+	width: 4px;
+	height: 58px;
+	padding-left: 10px;
+	margin: 10px 0 0;
+	font-weight: 300;
+	text-transform: uppercase;
+}
+
+summary > * {
+
+}
+
+summary > *:nth-child(2n) {
+	box-shadow: inset 0 10px 20px rgba(0,0,0,0.2);
+	border-radius: 5px;
+	color: #25405a;
+}
+
+summary > efficient_only::before,
+summary > manufacturer::before,
+summary > year::before,
+summary > date_from::before,
+summary > date_to::before,
+summary > department_name::before,
+summary > minimum_fee::before,
+summary > minimum_class::before,
+summary > purchased_before::before  {
+	display: inline-block;
+	font-weight: bold;
+	font-size: 17px;
+	padding: 5px 5px 5px 12px;
+	color: black;
+	border-left: 10px solid #b5804a;
+	font-weight: 300;
+}
+
+summary > efficient_only::before {
+	content: "Ta lista zawiera tylko sprawne komputery.";
+}
+
+summary > manufacturer::before {
+	content: "Producent: ";
+} 
+
+summary > year::before {
+	content: "Rok: ";
+}
+
+summary > date_from::before {
+	content: "Data od: ";
+}
+
+summary > date_to::before {
+	content: "Data do: ";
+}
+
+summary > department_name::before {
+	content: "Dział: ";
+}
+
+summary > minimum_fee::before {
+	content: "Minimalny koszt naprawy: ";
+}
+
+summary > minimum_class::before {
+	content: "Minimalna klasa: ";
+}
+
+summary > purchased_before::before {
+	content: "Zakupione przed: ";
+}
+
+efficient_only {
+	color: rgba(0,0,0,0) !important;
+	display: block;
+}
+
+machine, class, manuf, cost_info, issue, person {
+	font-size: 16px;
+	display: table-row;
+}
+
+machine *, class *, manuf *, cost_info *, issue *, person * {
+	border-collapse: collapse;
+	padding: 10px;
+	display: table-cell;
+	width: auto;
+	font-weight: 300;
+	transition: background-color 0.2s;
+	-webkit-transition: background-color 0.2s;
+	-moz-transition: background-color 0.2s;
+	-o-transition: background-color 0.2s;
+	-ms-transition: background-color 0.2s;
+}
+
+machine *::before,
+class *::before,
+manuf *::before,
+cost_info *::before,
+issue *::before,
+person *::before {
+	margin-right: 14px;
+	font-weight: bold;
+}
+
+machine:first-of-type > *,
+class:first-of-type > *,
+manuf:first-of-type > *,
+cost_info:first-of-type > *,
+issue:first-of-type > *,
+person:first-of-type > * {
+	padding-top: 0;
+}
+
+machine:first-of-type *::before,
+class:first-of-type *::before,
+manuf:first-of-type *::before,
+cost_info:first-of-type *::before, 
+issue:first-of-type *::before,
+person:first-of-type *::before {
+	border-bottom: 1px solid #000;
+	background: #25405a;
+	color: white;
+    margin: 0 -10px 10px;
+    padding: 15px 15px 0;
+	height: 40px;
+}
+
+*:first-of-type *::before {
+	display: block;
+}
+
+*:first-of-type dep_name::before {
+	content: "Nazwa działu";
+}
+
+*:first-of-type serial_number::before {
+	content: "Numer seryjny";
+}
+
+*:first-of-type issue_desc::before {
+	content: "Opis usterki";
+}
+
+*:first-of-type  repair_fee::before {
+	content: "Koszt naprawy";
+}
+
+*:first-of-type class_sm::before {
+	content: "Symbol klasy";
+}
+
+*:first-of-type machines::before {
+	content: "Liczba komputerów";
+}
+
+*:first-of-type mnf_name::before {
+	content: "Producent";
+}
+
+*:first-of-type average_fee::before {
+	content: "Średni koszt naprawy";
+}
+
+*:first-of-type total_fee::before {
+	content: "Całkowity koszt napraw";
+}
+
+*:first-of-type issue_date::before {
+	content: "Data usterki";
+}
+
+*:first-of-type owner_name::before {
+	content: "Imię właściciela";
+}
+
+*:first-of-type owner_surname::before {
+	content: "Nazwisko właściciela";
+}
+
+*:first-of-type class_::before {
+	content: "Klasa";
+}
+
+*:first-of-type machine_desc::before {
+	content: "Opis komputera";
+}
+
+machine *:hover,
+class *:hover,
+manuf *:hover,
+cost_info *:hover,
+issue *:hover,
+person *:hover {
+	color: white;
+	background-color: #305376;
+	box-shadow: 0 0 10px rgba(0,0,0,0.5);
+	cursor: pointer;
+}
+
+machine *:active,
+class *:active,
+manuf *:active,
+cost_info *:active,
+issue *:active,
+person *:active {
+	background-color: #b5804a;
+}
